@@ -1,5 +1,12 @@
 ### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+GET http://localhost:8080/test
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInN1YiI6ImdpbGJlcnRvQGdtYWlsLmNvbSIsImV4cCI6MTc3MDQ3NzYyNSwiaWF0IjoxNzcwMzkxMjI1fQ.1q1qiyPpn5jSkNpgb_HzCtYV6dEkOkKFdo5TYlW8UTU
 
 ###
+POST localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "gilberto@gmail.com",
+  "password": "pass12345"
+}
