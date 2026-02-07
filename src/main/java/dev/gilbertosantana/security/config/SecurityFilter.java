@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.servlet.ServletException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -32,7 +33,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 			Optional<JWTUserData> optUser = tokenConfig.validateToken(token);
 			if(optUser.isPresent()){
 				JWTUserData userData = optUser.get();
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userData, null, List.of());
+				List<SimpleGrantedAuthority> authorities = userData.roles().stream()
+						.map(SimpleGrantedAuthority::new)
+						.toList();
+				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userData, null, authorities);
 				System.out.println(authentication);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}

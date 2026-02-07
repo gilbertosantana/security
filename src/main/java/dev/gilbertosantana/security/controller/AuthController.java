@@ -1,5 +1,6 @@
 package dev.gilbertosantana.security.controller;
 
+import dev.gilbertosantana.security.entity.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,8 @@ import dev.gilbertosantana.security.dto.response.RegisterUserResponse;
 import dev.gilbertosantana.security.entity.User;
 import dev.gilbertosantana.security.repository.UserRepository;
 import jakarta.validation.Valid;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")
@@ -49,7 +52,13 @@ public class AuthController {
 		newUser.setPassword(passwordEncoder.encode(request.password()));
 		newUser.setEmail(request.email());
 		newUser.setName(request.name());
-		
+
+		if(request.role() != null) {
+			newUser.setRoles(Set.of(request.role()));
+		} else {
+			newUser.setRoles(Set.of(Role.ROLE_USER));
+		}
+
 		userRepository.save(newUser);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterUserResponse(newUser.getName(), newUser.getEmail()));

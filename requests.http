@@ -3,10 +3,29 @@ GET http://localhost:8080/test
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInN1YiI6ImdpbGJlcnRvQGdtYWlsLmNvbSIsImV4cCI6MTc3MDQ3NzYyNSwiaWF0IjoxNzcwMzkxMjI1fQ.1q1qiyPpn5jSkNpgb_HzCtYV6dEkOkKFdo5TYlW8UTU
 
 ###
+POST localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "name" : "Gilberto Admin",
+  "email" : "gilber@gmail.com",
+  "password" : "pass12345",
+  "role" : "ROLE_ADMIN"
+}
+
+###
 POST localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "gilberto@gmail.com",
+  "email": "joao@gmail.com",
   "password": "pass12345"
 }
+
+###
+GET localhost:8080/user/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsImV4cCI6MTc3MDUyMTMwNCwiaWF0IjoxNzcwNDM0OTA0fQ.9UeUtp0xQ4bqKiWxyi-NcRNl5ckSA8rK-7LLcKk6QzU
+
+###
+GET localhost:8080/admin/panel
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsImV4cCI6MTc3MDUyMTMwNCwiaWF0IjoxNzcwNDM0OTA0fQ.9UeUtp0xQ4bqKiWxyi-NcRNl5ckSA8rK-7LLcKk6QzU
